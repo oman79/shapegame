@@ -10,10 +10,17 @@
 
 #define which compiler to usee
 CXX		:= g++
-OUTPUT	:= sfmlgame
-
+ifeq ($(OS),Windows_NT)
+	OUTPUT	:= sfmlgame.exe
+else
+	OUTPUT  := sfmlgame
+endif
 # if you need to manually specifiy your SFML install dir, do so here
-SFML_DIR := .
+ifeq ($(OS),Windows_NT)
+	SFML_DIR := C:/SFML
+else
+	SFML_DIR := .
+endif
 
 # compiler and linker flags
 CXX_FLAGS := -O3 -std=c++17
@@ -23,6 +30,12 @@ LDFLAGS	  := -O3 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio -L$(SF
 # the source files for the ecs game engine
 SRC_FILES := $(wildcard src/*.cpp)
 OBJ_FILES := $(SRC_FILES:.cpp=.o)
+
+ifeq ($(OS),Windows_NT)
+	RUN_COMMAND := $(OUTPUT)
+else
+	RUN_COMMAND := ./$(OUTPUT)
+endif
 
 # all of these targets will be made if you just type make
 all: $(OUTPUT)
@@ -41,4 +54,4 @@ clean:
 
 # typing 'make run' will compile and run the program
 run: $(OUTPUT)
-	cd bin && ./sfmlgame && cd ..
+	cd bin && $(RUN_COMMAND) && cd ..

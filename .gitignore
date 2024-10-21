@@ -1,3 +1,6 @@
 /.vscode
 /poop2.zip
 *.dll
+*.o
+*.exe
+sfmlgame
