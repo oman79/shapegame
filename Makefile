@@ -15,7 +15,17 @@ ifeq ($(OS),Windows_NT)
 else
 	OUTPUT  := sfmlgame
 endif
+ifeq ($(OS),Windows_NT)
+	OUTPUT	:= sfmlgame.exe
+else
+	OUTPUT  := sfmlgame
+endif
 # if you need to manually specifiy your SFML install dir, do so here
+ifeq ($(OS),Windows_NT)
+	SFML_DIR := C:/SFML
+else
+	SFML_DIR := .
+endif
 ifeq ($(OS),Windows_NT)
 	SFML_DIR := C:/SFML
 else
