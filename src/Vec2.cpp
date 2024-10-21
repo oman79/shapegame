@@ -1,4 +1,5 @@
 #include "Vec2.h"
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 Vec2::Vec2()

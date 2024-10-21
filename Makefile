@@ -10,10 +10,17 @@
 
 #define which compiler to usee
 CXX		:= g++
-OUTPUT	:= sfmlgame
-
+ifeq ($(OS),Windows_NT)
+	OUTPUT	:= sfmlgame.exe
+else
+	OUTPUT  := sfmlgame
+endif
 # if you need to manually specifiy your SFML install dir, do so here
-SFML_DIR := .
+ifeq ($(OS),Windows_NT)
+	SFML_DIR := C:/SFML
+else
+	SFML_DIR := .
+endif
 
 # compiler and linker flags
 CXX_FLAGS := -O3 -std=c++17
@@ -41,4 +48,4 @@ clean:
 
 # typing 'make run' will compile and run the program
 run: $(OUTPUT)
-	cd bin && ./sfmlgame && cd ..
+	cd bin && $(OUTPUT) && cd ..
