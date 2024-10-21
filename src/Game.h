@@ -51,6 +51,7 @@ class Game{
     void sRender();         // System: Render / Drawing
     void sEnemySpawner();   // System: Spawns Enemies
     void sCollision();      // System: Collisions
+    void sUpdateScore();
 
     void spawnText();
     void spawnPlayer();

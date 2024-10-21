@@ -80,8 +80,8 @@ void Game::init(const std::string &path)
     m_window.setFramerateLimit(fps);
     initBackground();
     spawnPlayer();
-    auto entity = m_entities.addEntity("text");
-    entity->cText = std::make_shared<CText>(m_font, 15, sf::Color(255,255,255));
+    m_text = m_entities.addEntity("text");
+    m_text->cText = std::make_shared<CText>(m_font, 30, sf::Color(255,255,255));
 
 }
 
@@ -108,6 +108,7 @@ void Game::run()
         sCollision();
         sLifespan();
         sUserInput();
+        sUpdateScore();
         sRender();
         m_currentFrame++;
         }
@@ -454,6 +455,8 @@ void Game::sCollision()
                 e->destroy();
                 b->destroy();
                 spawnSmallEnemies(e);
+                m_score += 2;
+                std::cout << m_score << "\n";
             }
         }
         for (auto e : m_entities.getEntities("small enemy"))
@@ -463,6 +466,8 @@ void Game::sCollision()
             {
                 e->destroy();
                 b->destroy();
+                m_score += 1;
+                std::cout << m_score << "\n";
             }
         }
     }
@@ -505,6 +510,11 @@ void Game::sEnemySpawner()
         m_lastEnemySpawnTime = m_currentFrame;
     }
     m_currentFrame++;
+}
+
+void Game::sUpdateScore()
+{
+    m_text->cText->text.setString("Score: " + std::to_string(m_score));
 }
 
 void Game::sRender()
