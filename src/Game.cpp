@@ -457,7 +457,7 @@ void Game::sCollision()
                 b->destroy();
                 spawnSmallEnemies(e);
                 m_score += 2;
-                std::cout << m_score << "\n";
+                //std::cout << m_score << "\n";
             }
         }
         for (auto e : m_entities.getEntities("small enemy"))
@@ -468,7 +468,7 @@ void Game::sCollision()
                 e->destroy();
                 b->destroy();
                 m_score += 1;
-                std::cout << m_score << "\n";
+                //std::cout << m_score << "\n";
             }
         }
     }
